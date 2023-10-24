@@ -49,7 +49,7 @@
 							<td th:text="${d.cantidad}"></td>
 							<td th:text="${'S/ ' + d.subtotal}"></td>
 							<td class="text-center">
-								<a class="btn btn-sm btn-danger" th:href="@{/eliminar/} + ${d.producto.idProducto}">Eliminar</a>
+								<a class="btn btn-sm btn-danger" th:href="@{'/eliminar/' + ${d.producto.idProducto}}">Eliminar</a>
 							</td>
 						</tr>
 					</tbody>
@@ -84,9 +84,9 @@
 					<tfoot class="table-secondary">
 						<tr>						
 						    <td class="text-center px-3">
-						        <form th:action="@{/actualizarCarrito}" method="post">
-						            <button type="submit" class="btn btn-danger w-100">Calcular Envio y Descuento</button>
-						        </form>
+						        <form th:action="@{/calcularEnvioYDescuento}" method="post">
+    <button type="submit" class="btn btn-danger w-100">Calcular Envío y Descuento</button>
+</form>
 						    </td>
 						</tr>
 						<tr>
