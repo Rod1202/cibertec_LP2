@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Formulario de Venta de Boletos</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        /* Agregar estilos personalizados */
+        .titulo-venta {
+            border: 6px solid #ddd; /* Añadir borde al div */
+            padding: 10px; /* Agregar espacio interno */
+            text-align: center; /* Centrar texto */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <!-- Logo de la aerolínea -->
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/52/LAN_Airlines_logo.svg"
+                 alt="Logo de la Aerolínea" class="img-fluid">
+        </div>
+        <div class="col-md-6 text-right">
+            <div class="titulo-venta">
+                <!-- Título y fecha del sistema -->
+                <p>VENTA DE BOLETOS</p>
+                <p id="fechaSistema"></p>
+            </div>
+        </div>
+    </div>
+
+    <form class="mt-5" th:action="@{/agregarVenta}" method="post">
+        <!-- Ciudad Origen y Ciudad Destino (listas desplegables) -->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="codigo_postal_origen_id">Ciudad Origen</label>
+                <select class="form-control" name="codigo_postal_origen_id">
+                    <option th:each="ciudad : ${ciudades}" th:value="${ciudad.codigo_postal}"
+                            th:text="${ciudad.nombre}"></option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="codigo_postal_destino_id">Ciudad Destino</label>
+                <select class="form-control" name="codigo_postal_destino_id">
+                    <option th:each="ciudad : ${ciudades}" th:value="${ciudad.codigo_postal}"
+                            th:text="${ciudad.nombre}"></option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Fecha Salida y Fecha Retorno -->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="fecha_viaje">Fecha Salida</label>
+                <input type="date" class="form-control" name="fecha_viaje">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="fecha_retorno">Fecha Retorno</label>
+                <input type="date" class="form-control" name="fecha_retorno">
+            </div>
+        </div>
+
+        <!-- Nombre del Comprador y Cantidad -->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="nombre_comprador">Nombre del Comprador</label>
+                <input type="text" class="form-control" name="nombre_comprador" placeholder="Nombre">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="cantidad">Cantidad</label>
+                <input type="number" class="form-control" name="cantidad" placeholder="Cantidad">
+            </div>
+        </div>
+
+        <!-- Botones Agregar y Limpiar -->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <button type="submit" class="btn btn-success">Agregar</button>
+            </div>
+            <div class="form-group col-md-6">
+                <button type="reset" class="btn btn-danger">Limpiar</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<script>
+    // Script para obtener la fecha del sistema y mostrarla en el formulario
+    document.getElementById("fechaSistema").innerHTML = new Date().toLocaleDateString();
+</script>
+
+</body>
+</html>

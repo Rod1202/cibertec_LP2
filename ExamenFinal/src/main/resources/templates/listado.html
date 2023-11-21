@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Listado de Pasajes</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .container {
+      margin-top: 50px;
+    }
+    h1 {
+      color: #007bff;
+    }
+    table {
+      margin-top: 20px;
+    }
+    .btn-pagar {
+      background-color: #007bff;
+      color: #fff;
+    }
+    .seguir-comprando {
+      color: #007bff;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1 class="text-center">LISTADO DE PASAJES ADQUIRIDOS</h1>
+  
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Ciudad Origen</th>
+        <th>Ciudad Destino</th>
+        <th>Fecha Salida</th>
+        <th>Fecha Retorno</th>
+        <th>Comprador</th>
+        <th>Cantidad</th>
+        <th>Sub-Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Iterar sobre la lista de ventas y mostrar la información -->
+		<tr th:each="ventaCompleta : ${ventas}">
+    <td th:text="${ventaCompleta.detalleVenta.codigo_postal_origen.nombre}"></td>
+    <td th:text="${ventaCompleta.detalleVenta.codigo_postal_destino.nombre}"></td>
+    <td th:text="${#dates.format(ventaCompleta.detalleVenta.fecha_viaje, 'dd-MM-yyyy')}"></td>
+    <td th:text="${#dates.format(ventaCompleta.detalleVenta.fecha_retorno, 'dd-MM-yyyy')}"></td>
+    <td th:text="${ventaCompleta.venta.nombre_comprador}"></td>
+    <td th:text="${ventaCompleta.detalleVenta.cantidad}"></td>
+    <td th:text="${ventaCompleta.detalleVenta.sub_total}"></td>
+</tr>
+    </tbody>
+  </table>
+
+  <div class="text-center">
+   <form th:action="@{/pagar}" method="post">
+            <button type="submit" class="btn btn-pagar btn-lg">Pagar</button>
+        </form>
+  </div>
+
+  <a href="/formulario" class="seguir-comprando ml-2">Seguir comprando</a>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
